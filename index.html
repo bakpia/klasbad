@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Badminton Antar Perondan RT 72</title>
+    <!-- Memuat Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Memuat Heroicons untuk ikon -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <style>
+      /* Menggunakan font Poppins sebagai default */
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f0f4f8; /* Warna latar belakang lebih lembut */
+      }
+      .winner-highlight {
+        border-left: 4px solid #f59e0b; /* Aksen emas untuk pemenang */
+      }
+      .loser-text {
+        color: #9ca3af; /* Abu-abu untuk yang kalah */
+      }
+      .final-matches-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+      @media (min-width: 768px) {
+        .final-matches-container {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body class="text-gray-800">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+      <header class="text-center mb-10">
+        <div
+          class="inline-block bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-4 rounded-xl shadow-lg mb-4"
+        >
+          <ion-icon name="trophy-outline" class="text-5xl"></ion-icon>
+        </div>
+        <h1
+          class="text-4xl sm:text-5xl font-bold text-gray-900"
+          id="tournament-name"
+        >
+          Memuat...
+        </h1>
+        <p class="text-gray-500 mt-2">
+          Memperingati HUT Kemerdekaan RI yang ke-80
+        </p>
+      </header>
+
+      <!-- Navigasi Tab -->
+      <div class="mb-8">
+        <div class="sm:hidden">
+          <label for="tabs" class="sr-only">Select a tab</label>
+          <select
+            id="tabs"
+            name="tabs"
+            class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+          ></select>
+        </div>
+        <div class="hidden sm:block">
+          <div class="border-b border-gray-200">
+            <nav
+              id="desktop-tabs"
+              class="-mb-px flex space-x-8"
+              aria-label="Tabs"
+            >
+              <!-- Tab buttons akan di-generate oleh JS -->
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <!-- Konten Tab -->
+      <main>
+        <!-- Loading Indicator -->
+        <div id="loading" class="text-center py-16">
+          <svg
+            class="animate-spin h-10 w-10 text-indigo-600 mx-auto"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          <p class="mt-4 text-gray-600 font-medium">Memuat Data Turnamen...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div
+          id="error"
+          class="hidden text-center py-12 bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg"
+        >
+          <div class="flex">
+            <div class="py-1">
+              <ion-icon
+                name="close-circle-outline"
+                class="text-2xl text-red-500"
+              ></ion-icon>
+            </div>
+            <div class="ml-3">
+              <p class="text-red-700 font-bold">Gagal memuat data!</p>
+              <p class="text-red-600 mt-1 text-sm">
+                Pastikan file
+                <code class="bg-red-100 px-1 rounded">assets/data.json</code>
+                ada dan formatnya benar.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Konten Grup A -->
+        <div id="group-a" class="tab-content"></div>
+
+        <!-- Konten Grup B -->
+        <div id="group-b" class="tab-content hidden"></div>
+
+        <!-- Konten Babak Final -->
+        <div id="knockout" class="tab-content hidden"></div>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const tabContainerDesktop = document.getElementById("desktop-tabs");
+        const tabSelectMobile = document.getElementById("tabs");
+        const loadingEl = document.getElementById("loading");
+        const errorEl = document.getElementById("error");
+        const tournamentNameEl = document.getElementById("tournament-name");
+
+        const tabsConfig = [
+          { id: "group-a", name: "Grup A", icon: "people-outline" },
+          { id: "group-b", name: "Grup B", icon: "people-outline" },
+          { id: "knockout", name: "Babak Final", icon: "trophy-outline" },
+        ];
+
+        function switchTab(targetId) {
+          document.querySelectorAll(".tab-content").forEach((content) => {
+            content.classList.toggle("hidden", content.id !== targetId);
+          });
+
+          tabContainerDesktop.querySelectorAll("a").forEach((a) => {
+            const isActive = a.getAttribute("data-tab") === targetId;
+            a.classList.toggle("border-indigo-500", isActive);
+            a.classList.toggle("text-indigo-600", isActive);
+            a.classList.toggle("border-transparent", !isActive);
+            a.classList.toggle("text-gray-500", !isActive);
+            a.classList.toggle("hover:text-gray-700", !isActive);
+            a.classList.toggle("hover:border-gray-300", !isActive);
+          });
+
+          tabSelectMobile.value = targetId;
+        }
+
+        tabsConfig.forEach((tab, index) => {
+          const link = document.createElement("a");
+          link.href = "#";
+          link.setAttribute("data-tab", tab.id);
+          link.className = `flex items-center whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ease-in-out`;
+          link.innerHTML = `<ion-icon name="${tab.icon}" class="mr-2"></ion-icon> ${tab.name}`;
+          if (index === 0) {
+            link.classList.add("border-indigo-500", "text-indigo-600");
+          } else {
+            link.classList.add(
+              "border-transparent",
+              "text-gray-500",
+              "hover:text-gray-700",
+              "hover:border-gray-300"
+            );
+          }
+          link.onclick = (e) => {
+            e.preventDefault();
+            switchTab(tab.id);
+          };
+          tabContainerDesktop.appendChild(link);
+
+          const option = document.createElement("option");
+          option.value = tab.id;
+          option.textContent = tab.name;
+          tabSelectMobile.appendChild(option);
+        });
+
+        tabSelectMobile.onchange = () => switchTab(tabSelectMobile.value);
+
+        const renderGroup = (group, containerId) => {
+          const container = document.getElementById(containerId);
+          if (!group || !container) return;
+
+          group.teams.sort(
+            (a, b) =>
+              b.won - a.won ||
+              b.totalSetsWon -
+                b.totalSetsLost -
+                (a.totalSetsWon - a.totalSetsLost) ||
+              b.totalPointsWon -
+                b.totalPointsLost -
+                (a.totalPointsWon - a.totalPointsLost)
+          );
+
+          let contentHTML = `
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2">
+                            <h2 class="text-2xl font-bold mb-4 text-gray-800">${group.name} - Klasemen</h2>
+                            <div class="overflow-x-auto bg-white rounded-xl shadow-md border border-gray-200">
+                                <table class="w-full min-w-[600px] text-sm text-left">
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-4 py-3 text-center">#</th>
+                                            <th scope="col" class="px-6 py-3">Tim</th>
+                                            <th scope="col" class="px-4 py-3 text-center" title="Main">M</th>
+                                            <th scope="col" class="px-4 py-3 text-center" title="Menang">W</th>
+                                            <th scope="col" class="px-4 py-3 text-center" title="Kalah">L</th>
+                                            <th scope="col" class="px-4 py-3 text-center" title="Set Menang">SW</th>
+                                            <th scope="col" class="px-4 py-3 text-center" title="Set Kalah">SL</th>
+                                            <th scope="col" class="px-6 py-3 text-center">Poin</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>`;
+
+          group.teams.forEach((team, index) => {
+            const isQualified = index < 2;
+            contentHTML += `
+                        <tr class="border-b hover:bg-gray-50 transition-colors duration-200 ${
+                          isQualified ? "bg-indigo-50" : "bg-white"
+                        }">
+                            <td class="px-4 py-4 font-bold text-center ${
+                              isQualified ? "text-indigo-600" : "text-gray-500"
+                            }">${index + 1}</td>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    ${team.name}
+                                    ${
+                                      isQualified
+                                        ? '<ion-icon name="checkmark-circle" class="ml-2 text-green-500" title="Lolos"></ion-icon>'
+                                        : ""
+                                    }
+                                </div>
+                            </th>
+                            <td class="px-4 py-4 text-center">${
+                              team.played
+                            }</td>
+                            <td class="px-4 py-4 text-center">${team.won}</td>
+                            <td class="px-4 py-4 text-center">${team.lost}</td>
+                            <td class="px-4 py-4 text-center">${
+                              team.totalSetsWon
+                            }</td>
+                            <td class="px-4 py-4 text-center">${
+                              team.totalSetsLost
+                            }</td>
+                            <td class="px-6 py-4 text-center whitespace-nowrap">${
+                              team.totalPointsWon
+                            } - ${team.totalPointsLost}</td>
+                        </tr>`;
+          });
+
+          contentHTML += `</tbody></table></div></div><div class="lg:col-span-1">
+                                <h2 class="text-2xl font-bold mb-4 text-gray-800">Riwayat Laga</h2>
+                                <div class="space-y-4">`;
+
+          if (group.matches.length === 0) {
+            contentHTML += `<div class="text-center py-10 px-4 bg-gray-100 rounded-lg"><p class="text-gray-500">Belum ada pertandingan.</p></div>`;
+          } else {
+            group.matches.forEach((match) => {
+              const team1SetsWon =
+                (match.team1Set1Score > match.team2Set1Score ? 1 : 0) +
+                (match.team1Set2Score > match.team2Set2Score ? 1 : 0);
+              const winnerName =
+                team1SetsWon > 2 - team1SetsWon
+                  ? match.team1Name
+                  : match.team2Name;
+              contentHTML += `
+                            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+                                <p class="font-semibold text-gray-800">${match.team1Name} vs ${match.team2Name}</p>
+                                <p class="text-sm text-gray-500 mt-1">
+                                    Skor: <span class="font-medium text-gray-700">${match.team1Set1Score}-${match.team2Set1Score}</span>, <span class="font-medium text-gray-700">${match.team1Set2Score}-${match.team2Set2Score}</span>
+                                </p>
+                                <p class="text-sm font-semibold mt-2 text-indigo-600">Pemenang Set: ${winnerName}</p>
+                            </div>`;
+            });
+          }
+          contentHTML += `</div></div></div>`;
+          container.innerHTML = contentHTML;
+        };
+
+        const renderKnockout = (knockoutStage, containerId) => {
+          const container = document.getElementById(containerId);
+          // Cek awal jika babak knockout belum ada sama sekali
+          if (
+            !knockoutStage ||
+            !knockoutStage.semiFinals ||
+            knockoutStage.semiFinals.length === 0
+          ) {
+            container.innerHTML = `<div class="text-center py-16 px-4 bg-white rounded-lg shadow"><ion-icon name="hourglass-outline" class="text-5xl text-gray-400"></ion-icon><p class="mt-4 text-gray-600 font-medium">Babak final belum dimulai atau tidak ada data.</p></div>`;
+            return;
+          }
+
+          const createMatchHTML = (match, title) => {
+            const team1Name = match.team1 ? match.team1.name : "TBD";
+            const team2Name = match.team2 ? match.team2.name : "TBD";
+            let winnerClass1 = "",
+              winnerClass2 = "";
+
+            if (match.winner) {
+              if (match.winner.name === team1Name) {
+                winnerClass1 = "font-bold text-gray-900";
+                winnerClass2 = "loser-text";
+              } else {
+                winnerClass2 = "font-bold text-gray-900";
+                winnerClass1 = "loser-text";
+              }
+            }
+
+            const team1Scores = `
+                        <div class="flex space-x-3 text-base font-semibold">
+                            <span class="w-8 text-center">${
+                              match.team1Set1Score ?? ""
+                            }</span>
+                            <span class="w-8 text-center">${
+                              match.team1Set2Score ?? ""
+                            }</span>
+                            ${
+                              match.team1Set3Score != null
+                                ? `<span class="w-8 text-center">${match.team1Set3Score}</span>`
+                                : ""
+                            }
+                        </div>
+                    `;
+
+            const team2Scores = `
+                        <div class="flex space-x-3 text-base font-semibold">
+                            <span class="w-8 text-center">${
+                              match.team2Set1Score ?? ""
+                            }</span>
+                            <span class="w-8 text-center">${
+                              match.team2Set2Score ?? ""
+                            }</span>
+                            ${
+                              match.team2Set3Score != null
+                                ? `<span class="w-8 text-center">${match.team2Set3Score}</span>`
+                                : ""
+                            }
+                        </div>
+                    `;
+
+            const scoreHeader = `
+                        <div class="flex justify-end space-x-3 text-xs text-gray-400 font-medium pr-1">
+                            <span class="w-8 text-center">S1</span>
+                            <span class="w-8 text-center">S2</span>
+                            ${
+                              match.team1Set3Score != null ||
+                              match.team2Set3Score != null
+                                ? `<span class="w-8 text-center">S3</span>`
+                                : ""
+                            }
+                        </div>
+                    `;
+
+            return `
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-700 mb-2 text-center">${title}</h3>
+                            <div class="bg-white rounded-xl shadow-lg border border-gray-200 w-full ${
+                              match.winner ? "winner-highlight" : ""
+                            }">
+                                <div class="p-4">
+                                    ${scoreHeader}
+                                    <div class="flex justify-between items-center mt-1 ${winnerClass1}">
+                                        <span class="truncate font-medium">${team1Name}</span>
+                                        ${team1Scores}
+                                    </div>
+                                    <hr class="my-2">
+                                    <div class="flex justify-between items-center ${winnerClass2}">
+                                        <span class="truncate font-medium">${team2Name}</span>
+                                        ${team2Scores}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+          };
+
+          // Selalu tampilkan babak semi-final
+          let semiFinalsHTML =
+            '<h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">Semi Final</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-8">';
+          knockoutStage.semiFinals.forEach((match, index) => {
+            semiFinalsHTML += createMatchHTML(match, `SF ${index + 1}`);
+          });
+          semiFinalsHTML += "</div>";
+
+          let finalsHTML = "";
+          let championHTML = "";
+
+          // **PERUBAHAN LOGIKA DI SINI**
+          // Cek apakah skor pertandingan final sudah diisi
+          if (
+            knockoutStage.finalMatch &&
+            knockoutStage.finalMatch.team1Set1Score !== null
+          ) {
+            // Jika sudah, tampilkan pertandingan final dan perebutan juara 3
+            finalsHTML = '<div class="final-matches-container">';
+            if (knockoutStage.thirdPlaceMatch) {
+              finalsHTML += createMatchHTML(
+                knockoutStage.thirdPlaceMatch,
+                "🥉 Perebutan Juara 3"
+              );
+            }
+            if (knockoutStage.finalMatch) {
+              finalsHTML += createMatchHTML(
+                knockoutStage.finalMatch,
+                "🏆 FINAL 🏆"
+              );
+            }
+            finalsHTML += "</div>";
+
+            // Tampilkan juga juaranya jika sudah ada
+            if (knockoutStage.finalMatch.winner) {
+              championHTML = `
+                            <div class="mt-12 text-center">
+                                <h3 class="text-lg font-medium text-amber-600">🥇 PEMENANG TURNAMEN 🥇</h3>
+                                <p class="text-4xl font-bold text-gray-900 mt-2">${knockoutStage.finalMatch.winner.name}</p>
+                            </div>`;
+            }
+          } else {
+            // Jika belum, tampilkan pesan placeholder
+            finalsHTML = `<div class="mt-12 text-center py-16 px-4 bg-white rounded-lg shadow"><ion-icon name="hourglass-outline" class="text-5xl text-gray-400"></ion-icon><p class="mt-4 text-gray-600 font-medium">Babak final (Juara 1 & 3) belum dimainkan.</p></div>`;
+          }
+
+          container.innerHTML = semiFinalsHTML + finalsHTML + championHTML;
+        };
+
+        fetch("assets/data.json")
+          .then((response) => {
+            if (!response.ok) throw new Error("Network response was not ok");
+            return response.json();
+          })
+          .then((data) => {
+            loadingEl.classList.add("hidden");
+            tournamentNameEl.textContent = data.name || "Perondan CUP RT 72";
+            renderGroup(data.groupA, "group-a");
+            renderGroup(data.groupB, "group-b");
+            renderKnockout(data.knockoutStage, "knockout");
+          })
+          .catch((error) => {
+            console.error("Error fetching or parsing data:", error);
+            loadingEl.classList.add("hidden");
+            errorEl.classList.remove("hidden");
+          });
+      });
+    </script>
+  </body>
+</html>

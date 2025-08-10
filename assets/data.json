@@ -1,0 +1,104 @@
+{
+  "groupA": {
+    "name": "Grup A",
+    "teams": [
+      {
+        "name": "Ganda B",
+        "played": 1,
+        "won": 1,
+        "lost": 0,
+        "totalSetsWon": 2,
+        "totalSetsLost": 0,
+        "totalPointsWon": 42,
+        "totalPointsLost": 28
+      },
+      {
+        "name": "Ganda A",
+        "played": 0,
+        "won": 0,
+        "lost": 0,
+        "totalSetsWon": 0,
+        "totalSetsLost": 0,
+        "totalPointsWon": 0,
+        "totalPointsLost": 0
+      },
+      {
+        "name": "Ganda C",
+        "played": 0,
+        "won": 0,
+        "lost": 0,
+        "totalSetsWon": 0,
+        "totalSetsLost": 0,
+        "totalPointsWon": 0,
+        "totalPointsLost": 0
+      },
+      {
+        "name": "Ganda D",
+        "played": 1,
+        "won": 0,
+        "lost": 1,
+        "totalSetsWon": 0,
+        "totalSetsLost": 2,
+        "totalPointsWon": 28,
+        "totalPointsLost": 42
+      }
+    ],
+    "matches": [
+      {
+        "team1Name": "Ganda B",
+        "team2Name": "Ganda D",
+        "team1Set1Score": 21,
+        "team2Set1Score": 16,
+        "team1Set2Score": 21,
+        "team2Set2Score": 12
+      }
+    ]
+  },
+  "groupB": {
+    "name": "Grup B",
+    "teams": [
+      {
+        "name": "Ganda E",
+        "played": 0,
+        "won": 0,
+        "lost": 0,
+        "totalSetsWon": 0,
+        "totalSetsLost": 0,
+        "totalPointsWon": 0,
+        "totalPointsLost": 0
+      },
+      {
+        "name": "Ganda F",
+        "played": 0,
+        "won": 0,
+        "lost": 0,
+        "totalSetsWon": 0,
+        "totalSetsLost": 0,
+        "totalPointsWon": 0,
+        "totalPointsLost": 0
+      },
+      {
+        "name": "Ganda G",
+        "played": 0,
+        "won": 0,
+        "lost": 0,
+        "totalSetsWon": 0,
+        "totalSetsLost": 0,
+        "totalPointsWon": 0,
+        "totalPointsLost": 0
+      },
+      {
+        "name": "Ganda H",
+        "played": 0,
+        "won": 0,
+        "lost": 0,
+        "totalSetsWon": 0,
+        "totalSetsLost": 0,
+        "totalPointsWon": 0,
+        "totalPointsLost": 0
+      }
+    ],
+    "matches": []
+  },
+  "knockoutStage": null
+}
