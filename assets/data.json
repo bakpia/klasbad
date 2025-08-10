@@ -3,17 +3,7 @@
     "name": "Grup A",
     "teams": [
       {
-        "name": "Ganda B",
-        "played": 1,
-        "won": 1,
-        "lost": 0,
-        "totalSetsWon": 2,
-        "totalSetsLost": 0,
-        "totalPointsWon": 42,
-        "totalPointsLost": 28
-      },
-      {
-        "name": "Ganda A",
+        "name": "Malam Rabu",
         "played": 0,
         "won": 0,
         "lost": 0,
@@ -23,7 +13,7 @@
         "totalPointsLost": 0
       },
       {
-        "name": "Ganda C",
+        "name": "Malam Senin",
         "played": 0,
         "won": 0,
         "lost": 0,
@@ -33,32 +23,33 @@
         "totalPointsLost": 0
       },
       {
-        "name": "Ganda D",
-        "played": 1,
+        "name": "Malam Minggu",
+        "played": 0,
         "won": 0,
-        "lost": 1,
+        "lost": 0,
         "totalSetsWon": 0,
-        "totalSetsLost": 2,
-        "totalPointsWon": 28,
-        "totalPointsLost": 42
+        "totalSetsLost": 0,
+        "totalPointsWon": 0,
+        "totalPointsLost": 0
+      },
+      {
+        "name": "Malam Selasa",
+        "played": 0,
+        "won": 0,
+        "lost": 0,
+        "totalSetsWon": 0,
+        "totalSetsLost": 0,
+        "totalPointsWon": 0,
+        "totalPointsLost": 0
       }
     ],
-    "matches": [
-      {
-        "team1Name": "Ganda B",
-        "team2Name": "Ganda D",
-        "team1Set1Score": 21,
-        "team2Set1Score": 16,
-        "team1Set2Score": 21,
-        "team2Set2Score": 12
-      }
-    ]
+    "matches": []
   },
   "groupB": {
     "name": "Grup B",
     "teams": [
       {
-        "name": "Ganda E",
+        "name": "Malam Jumat",
         "played": 0,
         "won": 0,
         "lost": 0,
@@ -68,7 +59,7 @@
         "totalPointsLost": 0
       },
       {
-        "name": "Ganda F",
+        "name": "Malam Sabtu",
         "played": 0,
         "won": 0,
         "lost": 0,
@@ -78,7 +69,7 @@
         "totalPointsLost": 0
       },
       {
-        "name": "Ganda G",
+        "name": "Malam Kamis",
         "played": 0,
         "won": 0,
         "lost": 0,
@@ -88,7 +79,7 @@
         "totalPointsLost": 0
       },
       {
-        "name": "Ganda H",
+        "name": "Pemuda",
         "played": 0,
         "won": 0,
         "lost": 0,
