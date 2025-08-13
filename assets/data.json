@@ -3,47 +3,80 @@
     "name": "Grup A",
     "teams": [
       {
-        "name": "Malam Rabu",
-        "played": 0,
-        "won": 0,
+        "name": "Malam Minggu",
+        "played": 2,
+        "won": 2,
         "lost": 0,
-        "totalSetsWon": 0,
+        "totalSetsWon": 4,
         "totalSetsLost": 0,
-        "totalPointsWon": 0,
-        "totalPointsLost": 0
+        "totalPointsWon": 84,
+        "totalPointsLost": 57
+      },
+      {
+        "name": "Malam Rabu",
+        "played": 2,
+        "won": 1,
+        "lost": 1,
+        "totalSetsWon": 3,
+        "totalSetsLost": 1,
+        "totalPointsWon": 82,
+        "totalPointsLost": 59
       },
       {
         "name": "Malam Senin",
-        "played": 0,
+        "played": 2,
         "won": 0,
-        "lost": 0,
-        "totalSetsWon": 0,
-        "totalSetsLost": 0,
-        "totalPointsWon": 0,
-        "totalPointsLost": 0
-      },
-      {
-        "name": "Malam Minggu",
-        "played": 0,
-        "won": 0,
-        "lost": 0,
-        "totalSetsWon": 0,
-        "totalSetsLost": 0,
-        "totalPointsWon": 0,
-        "totalPointsLost": 0
+        "lost": 2,
+        "totalSetsWon": 1,
+        "totalSetsLost": 3,
+        "totalPointsWon": 59,
+        "totalPointsLost": 82
       },
       {
         "name": "Malam Selasa",
-        "played": 0,
+        "played": 2,
         "won": 0,
-        "lost": 0,
+        "lost": 2,
         "totalSetsWon": 0,
-        "totalSetsLost": 0,
-        "totalPointsWon": 0,
-        "totalPointsLost": 0
+        "totalSetsLost": 4,
+        "totalPointsWon": 57,
+        "totalPointsLost": 84
       }
     ],
-    "matches": []
+    "matches": [
+      {
+        "team1Name": "Malam Rabu",
+        "team2Name": "Malam Senin",
+        "team1Set1Score": 21,
+        "team2Set1Score": 3,
+        "team1Set2Score": 21,
+        "team2Set2Score": 17
+      },
+      {
+        "team1Name": "Malam Rabu",
+        "team2Name": "Malam Senin",
+        "team1Set1Score": 19,
+        "team2Set1Score": 21,
+        "team1Set2Score": 21,
+        "team2Set2Score": 18
+      },
+      {
+        "team1Name": "Malam Minggu",
+        "team2Name": "Malam Selasa",
+        "team1Set1Score": 21,
+        "team2Set1Score": 12,
+        "team1Set2Score": 21,
+        "team2Set2Score": 17
+      },
+      {
+        "team1Name": "Malam Minggu",
+        "team2Name": "Malam Selasa",
+        "team1Set1Score": 21,
+        "team2Set1Score": 14,
+        "team1Set2Score": 21,
+        "team2Set2Score": 14
+      }
+    ]
   },
   "groupB": {
     "name": "Grup B",
