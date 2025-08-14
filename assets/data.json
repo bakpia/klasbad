@@ -83,46 +83,79 @@
     "teams": [
       {
         "name": "Malam Jumat",
-        "played": 0,
-        "won": 0,
-        "lost": 0,
-        "totalSetsWon": 0,
-        "totalSetsLost": 0,
-        "totalPointsWon": 0,
-        "totalPointsLost": 0
+        "played": 2,
+        "won": 1,
+        "lost": 1,
+        "totalSetsWon": 3,
+        "totalSetsLost": 1,
+        "totalPointsWon": 78,
+        "totalPointsLost": 55
       },
       {
         "name": "Malam Sabtu",
-        "played": 0,
-        "won": 0,
-        "lost": 0,
-        "totalSetsWon": 0,
-        "totalSetsLost": 0,
-        "totalPointsWon": 0,
-        "totalPointsLost": 0
+        "played": 2,
+        "won": 1,
+        "lost": 1,
+        "totalSetsWon": 3,
+        "totalSetsLost": 1,
+        "totalPointsWon": 82,
+        "totalPointsLost": 72
       },
       {
         "name": "Malam Kamis",
-        "played": 0,
+        "played": 2,
         "won": 0,
-        "lost": 0,
-        "totalSetsWon": 0,
-        "totalSetsLost": 0,
-        "totalPointsWon": 0,
-        "totalPointsLost": 0
+        "lost": 2,
+        "totalSetsWon": 1,
+        "totalSetsLost": 3,
+        "totalPointsWon": 72,
+        "totalPointsLost": 82
       },
       {
         "name": "Pemuda",
-        "played": 0,
+        "played": 2,
         "won": 0,
-        "lost": 0,
-        "totalSetsWon": 0,
-        "totalSetsLost": 0,
-        "totalPointsWon": 0,
-        "totalPointsLost": 0
+        "lost": 2,
+        "totalSetsWon": 1,
+        "totalSetsLost": 3,
+        "totalPointsWon": 55,
+        "totalPointsLost": 78
       }
     ],
-    "matches": []
+    "matches": [
+      {
+        "team1Name": "Malam Kamis",
+        "team2Name": "Malam Sabtu",
+        "team1Set1Score": 13,
+        "team2Set1Score": 21,
+        "team1Set2Score": 21,
+        "team2Set2Score": 18
+      },
+      {
+        "team1Name": "Malam Kamis",
+        "team2Name": "Malam Sabtu",
+        "team1Set1Score": 20,
+        "team2Set1Score": 22,
+        "team1Set2Score": 18,
+        "team2Set2Score": 21
+      },
+      {
+        "team1Name": "Malam Jumat",
+        "team2Name": "Pemuda",
+        "team1Set1Score": 21,
+        "team2Set1Score": 11,
+        "team1Set2Score": 21,
+        "team2Set2Score": 7
+      },
+      {
+        "team1Name": "Malam Jumat",
+        "team2Name": "Pemuda",
+        "team1Set1Score": 21,
+        "team2Set1Score": 16,
+        "team1Set2Score": 15,
+        "team2Set2Score": 21
+      }
+    ]
   },
   "knockoutStage": null
 }
