@@ -4,13 +4,13 @@
     "teams": [
       {
         "name": "Malam Rabu",
-        "played": 4,
-        "won": 3,
+        "played": 6,
+        "won": 5,
         "lost": 1,
-        "totalSetsWon": 7,
+        "totalSetsWon": 11,
         "totalSetsLost": 1,
-        "totalPointsWon": 169,
-        "totalPointsLost": 133
+        "totalPointsWon": 253,
+        "totalPointsLost": 190
       },
       {
         "name": "Malam Senin",
@@ -34,13 +34,13 @@
       },
       {
         "name": "Malam Selasa",
-        "played": 4,
+        "played": 6,
         "won": 0,
-        "lost": 4,
+        "lost": 6,
         "totalSetsWon": 0,
-        "totalSetsLost": 8,
-        "totalPointsWon": 112,
-        "totalPointsLost": 168
+        "totalSetsLost": 12,
+        "totalPointsWon": 169,
+        "totalPointsLost": 252
       }
     ],
     "matches": [
@@ -123,6 +123,22 @@
         "team2Set1Score": 21,
         "team1Set2Score": 10,
         "team2Set2Score": 21
+      },
+      {
+        "team1Name": "Malam Rabu",
+        "team2Name": "Malam Selasa",
+        "team1Set1Score": 21,
+        "team2Set1Score": 18,
+        "team1Set2Score": 21,
+        "team2Set2Score": 15
+      },
+      {
+        "team1Name": "Malam Rabu",
+        "team2Name": "Malam Selasa",
+        "team1Set1Score": 21,
+        "team2Set1Score": 15,
+        "team1Set2Score": 21,
+        "team2Set2Score": 9
       }
     ]
   },
