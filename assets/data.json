@@ -167,23 +167,23 @@
       },
       {
         "name": "Pemuda",
-        "played": 5,
-        "won": 1,
+        "played": 6,
+        "won": 2,
         "lost": 4,
-        "totalSetsWon": 4,
+        "totalSetsWon": 6,
         "totalSetsLost": 6,
-        "totalPointsWon": 149,
-        "totalPointsLost": 199
+        "totalPointsWon": 191,
+        "totalPointsLost": 221
       },
       {
         "name": "Malam Kamis",
-        "played": 5,
+        "played": 6,
         "won": 0,
-        "lost": 5,
+        "lost": 6,
         "totalSetsWon": 1,
-        "totalSetsLost": 9,
-        "totalPointsWon": 174,
-        "totalPointsLost": 210
+        "totalSetsLost": 11,
+        "totalPointsWon": 196,
+        "totalPointsLost": 252
       }
     ],
     "matches": [
@@ -274,6 +274,14 @@
         "team2Set1Score": 21,
         "team1Set2Score": 21,
         "team2Set2Score": 23
+      },
+      {
+        "team1Name": "Malam Kamis",
+        "team2Name": "Pemuda",
+        "team1Set1Score": 8,
+        "team2Set1Score": 21,
+        "team1Set2Score": 14,
+        "team2Set2Score": 21
       }
     ]
   },
